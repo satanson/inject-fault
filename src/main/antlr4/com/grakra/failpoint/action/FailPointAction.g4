@@ -8,12 +8,14 @@ failpoint_action
 
 failpoint_action_internal
     :   act_simple
-
-act_sequential
-    :   act_composable (Arrow act_composable)* act_sequential_tail
+    |   act_series
     ;
 
-act_sequential_tail
+act_series
+    :   act_series_elm (Arrow act_series_elm)* act_series_trail?
+    ;
+
+act_series_trail
     :   act_disable
     ;
 
@@ -27,18 +29,21 @@ act_simple
     |   act_disable
     ;
 
-act_composable
-    :   act_randomized
-    |   act_repeatable
+act_series_elm
+    :   act_repeatable
     |   act_repeated
     ;
 
-act_randomized
-    :   LeftBracket act_probable (Comma act_probable)* RightBracket
+act_random
+    :   LeftBracket act_random_elm (Comma act_random_elm)* RightBracket
     ;
 
-act_probable
-    :   floatLiteral Star act_qualifiable
+act_random_elm
+    :   random_prob Star act_qualifiable
+    ;
+
+random_prob
+    :   floatLiteral
     ;
 
 act_qualifiable
@@ -49,12 +54,16 @@ act_qualifiable
     ;
 
 act_repeated
-    :   integerLiteral Star act_repeatable
+    :   repeat_times Star act_repeatable
+    ;
+
+repeat_times
+    :   integerLiteral
     ;
 
 act_repeatable
     :   act_qualifiable
-    |   act_randomized
+    |   act_random
     ;
 
 act_gdb
@@ -64,9 +73,6 @@ act_gdb
 act_gcore
     :   Gcore
     ;
-
-
-
 
 act_nop
     :   Nop

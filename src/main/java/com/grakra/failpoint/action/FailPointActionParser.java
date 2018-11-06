@@ -22,19 +22,23 @@ public class FailPointActionParser extends Parser {
 		Enable=13, Show=14, Status=15, Clear=16, Nop=17, LeftParenthesis=18, RightParenthesis=19, 
 		LeftBracket=20, RightBracket=21, Star=22, Comma=23;
 	public static final int
-		RULE_failpoint_action = 0, RULE_act_compound = 1, RULE_act_simple = 2, 
-		RULE_act_gdb = 3, RULE_act_gcore = 4, RULE_act_repeated = 5, RULE_act_randomized = 6, 
-		RULE_act_probable = 7, RULE_act_nop = 8, RULE_act_stall_return = 9, RULE_act_stall = 10, 
-		RULE_act_return = 11, RULE_act_show = 12, RULE_act_disable = 13, RULE_act_enable = 14, 
-		RULE_act_status = 15, RULE_act_clear = 16, RULE_literal = 17, RULE_numerical_literal = 18, 
-		RULE_booleanLiteral = 19, RULE_stringLiteral = 20, RULE_integerLiteral = 21, 
-		RULE_floatLiteral = 22;
+		RULE_failpoint_action = 0, RULE_failpoint_action_internal = 1, RULE_act_series = 2, 
+		RULE_act_series_trail = 3, RULE_act_simple = 4, RULE_act_series_elm = 5, 
+		RULE_act_random = 6, RULE_act_random_elm = 7, RULE_random_prob = 8, RULE_act_qualifiable = 9, 
+		RULE_act_repeated = 10, RULE_repeat_times = 11, RULE_act_repeatable = 12, 
+		RULE_act_gdb = 13, RULE_act_gcore = 14, RULE_act_nop = 15, RULE_act_stall_return = 16, 
+		RULE_act_stall = 17, RULE_act_return = 18, RULE_act_show = 19, RULE_act_disable = 20, 
+		RULE_act_enable = 21, RULE_act_status = 22, RULE_act_clear = 23, RULE_literal = 24, 
+		RULE_numerical_literal = 25, RULE_booleanLiteral = 26, RULE_stringLiteral = 27, 
+		RULE_integerLiteral = 28, RULE_floatLiteral = 29;
 	public static final String[] ruleNames = {
-		"failpoint_action", "act_compound", "act_simple", "act_gdb", "act_gcore", 
-		"act_repeated", "act_randomized", "act_probable", "act_nop", "act_stall_return", 
-		"act_stall", "act_return", "act_show", "act_disable", "act_enable", "act_status", 
-		"act_clear", "literal", "numerical_literal", "booleanLiteral", "stringLiteral", 
-		"integerLiteral", "floatLiteral"
+		"failpoint_action", "failpoint_action_internal", "act_series", "act_series_trail", 
+		"act_simple", "act_series_elm", "act_random", "act_random_elm", "random_prob", 
+		"act_qualifiable", "act_repeated", "repeat_times", "act_repeatable", "act_gdb", 
+		"act_gcore", "act_nop", "act_stall_return", "act_stall", "act_return", 
+		"act_show", "act_disable", "act_enable", "act_status", "act_clear", "literal", 
+		"numerical_literal", "booleanLiteral", "stringLiteral", "integerLiteral", 
+		"floatLiteral"
 	};
 
 	private static final String[] _LITERAL_NAMES = {
@@ -98,8 +102,8 @@ public class FailPointActionParser extends Parser {
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 	public static class Failpoint_actionContext extends ParserRuleContext {
-		public Act_compoundContext act_compound() {
-			return getRuleContext(Act_compoundContext.class,0);
+		public Failpoint_action_internalContext failpoint_action_internal() {
+			return getRuleContext(Failpoint_action_internalContext.class,0);
 		}
 		public TerminalNode EOF() { return getToken(FailPointActionParser.EOF, 0); }
 		public Failpoint_actionContext(ParserRuleContext parent, int invokingState) {
@@ -127,9 +131,9 @@ public class FailPointActionParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(46);
-			act_compound();
-			setState(47);
+			setState(60);
+			failpoint_action_internal();
+			setState(61);
 			match(EOF);
 			}
 		}
@@ -144,61 +148,191 @@ public class FailPointActionParser extends Parser {
 		return _localctx;
 	}
 
-	public static class Act_compoundContext extends ParserRuleContext {
-		public List<Act_simpleContext> act_simple() {
-			return getRuleContexts(Act_simpleContext.class);
+	public static class Failpoint_action_internalContext extends ParserRuleContext {
+		public Act_simpleContext act_simple() {
+			return getRuleContext(Act_simpleContext.class,0);
 		}
-		public Act_simpleContext act_simple(int i) {
-			return getRuleContext(Act_simpleContext.class,i);
+		public Act_seriesContext act_series() {
+			return getRuleContext(Act_seriesContext.class,0);
+		}
+		public Failpoint_action_internalContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_failpoint_action_internal; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).enterFailpoint_action_internal(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).exitFailpoint_action_internal(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof FailPointActionVisitor ) return ((FailPointActionVisitor<? extends T>)visitor).visitFailpoint_action_internal(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final Failpoint_action_internalContext failpoint_action_internal() throws RecognitionException {
+		Failpoint_action_internalContext _localctx = new Failpoint_action_internalContext(_ctx, getState());
+		enterRule(_localctx, 2, RULE_failpoint_action_internal);
+		try {
+			setState(65);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case Gdb:
+			case Gcore:
+			case Disable:
+			case Enable:
+			case Show:
+			case Status:
+			case Clear:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(63);
+				act_simple();
+				}
+				break;
+			case IntegerLiteral:
+			case Return:
+			case Stall:
+			case StallReturn:
+			case Nop:
+			case LeftBracket:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(64);
+				act_series();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class Act_seriesContext extends ParserRuleContext {
+		public List<Act_series_elmContext> act_series_elm() {
+			return getRuleContexts(Act_series_elmContext.class);
+		}
+		public Act_series_elmContext act_series_elm(int i) {
+			return getRuleContext(Act_series_elmContext.class,i);
 		}
 		public List<TerminalNode> Arrow() { return getTokens(FailPointActionParser.Arrow); }
 		public TerminalNode Arrow(int i) {
 			return getToken(FailPointActionParser.Arrow, i);
 		}
-		public Act_compoundContext(ParserRuleContext parent, int invokingState) {
+		public Act_series_trailContext act_series_trail() {
+			return getRuleContext(Act_series_trailContext.class,0);
+		}
+		public Act_seriesContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_act_compound; }
+		@Override public int getRuleIndex() { return RULE_act_series; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).enterAct_compound(this);
+			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).enterAct_series(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).exitAct_compound(this);
+			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).exitAct_series(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof FailPointActionVisitor ) return ((FailPointActionVisitor<? extends T>)visitor).visitAct_compound(this);
+			if ( visitor instanceof FailPointActionVisitor ) return ((FailPointActionVisitor<? extends T>)visitor).visitAct_series(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final Act_compoundContext act_compound() throws RecognitionException {
-		Act_compoundContext _localctx = new Act_compoundContext(_ctx, getState());
-		enterRule(_localctx, 2, RULE_act_compound);
+	public final Act_seriesContext act_series() throws RecognitionException {
+		Act_seriesContext _localctx = new Act_seriesContext(_ctx, getState());
+		enterRule(_localctx, 4, RULE_act_series);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(49);
-			act_simple();
-			setState(54);
+			setState(67);
+			act_series_elm();
+			setState(72);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==Arrow) {
 				{
 				{
-				setState(50);
+				setState(68);
 				match(Arrow);
-				setState(51);
-				act_simple();
+				setState(69);
+				act_series_elm();
 				}
 				}
-				setState(56);
+				setState(74);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
+			setState(76);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			if (_la==Disable) {
+				{
+				setState(75);
+				act_series_trail();
+				}
+			}
+
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class Act_series_trailContext extends ParserRuleContext {
+		public Act_disableContext act_disable() {
+			return getRuleContext(Act_disableContext.class,0);
+		}
+		public Act_series_trailContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_act_series_trail; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).enterAct_series_trail(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).exitAct_series_trail(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof FailPointActionVisitor ) return ((FailPointActionVisitor<? extends T>)visitor).visitAct_series_trail(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final Act_series_trailContext act_series_trail() throws RecognitionException {
+		Act_series_trailContext _localctx = new Act_series_trailContext(_ctx, getState());
+		enterRule(_localctx, 6, RULE_act_series_trail);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(78);
+			act_disable();
 			}
 		}
 		catch (RecognitionException re) {
@@ -219,30 +353,6 @@ public class FailPointActionParser extends Parser {
 		public Act_gcoreContext act_gcore() {
 			return getRuleContext(Act_gcoreContext.class,0);
 		}
-		public Act_nopContext act_nop() {
-			return getRuleContext(Act_nopContext.class,0);
-		}
-		public Act_stallContext act_stall() {
-			return getRuleContext(Act_stallContext.class,0);
-		}
-		public Act_returnContext act_return() {
-			return getRuleContext(Act_returnContext.class,0);
-		}
-		public Act_stall_returnContext act_stall_return() {
-			return getRuleContext(Act_stall_returnContext.class,0);
-		}
-		public Act_randomizedContext act_randomized() {
-			return getRuleContext(Act_randomizedContext.class,0);
-		}
-		public Act_repeatedContext act_repeated() {
-			return getRuleContext(Act_repeatedContext.class,0);
-		}
-		public Act_showContext act_show() {
-			return getRuleContext(Act_showContext.class,0);
-		}
-		public Act_disableContext act_disable() {
-			return getRuleContext(Act_disableContext.class,0);
-		}
 		public Act_enableContext act_enable() {
 			return getRuleContext(Act_enableContext.class,0);
 		}
@@ -251,6 +361,12 @@ public class FailPointActionParser extends Parser {
 		}
 		public Act_clearContext act_clear() {
 			return getRuleContext(Act_clearContext.class,0);
+		}
+		public Act_showContext act_show() {
+			return getRuleContext(Act_showContext.class,0);
+		}
+		public Act_disableContext act_disable() {
+			return getRuleContext(Act_disableContext.class,0);
 		}
 		public Act_simpleContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -273,100 +389,537 @@ public class FailPointActionParser extends Parser {
 
 	public final Act_simpleContext act_simple() throws RecognitionException {
 		Act_simpleContext _localctx = new Act_simpleContext(_ctx, getState());
-		enterRule(_localctx, 4, RULE_act_simple);
+		enterRule(_localctx, 8, RULE_act_simple);
 		try {
-			setState(70);
+			setState(87);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case Gdb:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(57);
+				setState(80);
 				act_gdb();
 				}
 				break;
 			case Gcore:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(58);
+				setState(81);
 				act_gcore();
 				}
 				break;
-			case Nop:
+			case Enable:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(59);
-				act_nop();
-				}
-				break;
-			case Stall:
-				enterOuterAlt(_localctx, 4);
-				{
-				setState(60);
-				act_stall();
-				}
-				break;
-			case Return:
-				enterOuterAlt(_localctx, 5);
-				{
-				setState(61);
-				act_return();
-				}
-				break;
-			case StallReturn:
-				enterOuterAlt(_localctx, 6);
-				{
-				setState(62);
-				act_stall_return();
-				}
-				break;
-			case LeftBracket:
-				enterOuterAlt(_localctx, 7);
-				{
-				setState(63);
-				act_randomized();
-				}
-				break;
-			case IntegerLiteral:
-				enterOuterAlt(_localctx, 8);
-				{
-				setState(64);
-				act_repeated();
-				}
-				break;
-			case Show:
-				enterOuterAlt(_localctx, 9);
-				{
-				setState(65);
-				act_show();
-				}
-				break;
-			case Disable:
-				enterOuterAlt(_localctx, 10);
-				{
-				setState(66);
-				act_disable();
-				}
-				break;
-			case Enable:
-				enterOuterAlt(_localctx, 11);
-				{
-				setState(67);
+				setState(82);
 				act_enable();
 				}
 				break;
 			case Status:
-				enterOuterAlt(_localctx, 12);
+				enterOuterAlt(_localctx, 4);
 				{
-				setState(68);
+				setState(83);
 				act_status();
 				}
 				break;
 			case Clear:
-				enterOuterAlt(_localctx, 13);
+				enterOuterAlt(_localctx, 5);
 				{
-				setState(69);
+				setState(84);
 				act_clear();
+				}
+				break;
+			case Show:
+				enterOuterAlt(_localctx, 6);
+				{
+				setState(85);
+				act_show();
+				}
+				break;
+			case Disable:
+				enterOuterAlt(_localctx, 7);
+				{
+				setState(86);
+				act_disable();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class Act_series_elmContext extends ParserRuleContext {
+		public Act_repeatableContext act_repeatable() {
+			return getRuleContext(Act_repeatableContext.class,0);
+		}
+		public Act_repeatedContext act_repeated() {
+			return getRuleContext(Act_repeatedContext.class,0);
+		}
+		public Act_series_elmContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_act_series_elm; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).enterAct_series_elm(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).exitAct_series_elm(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof FailPointActionVisitor ) return ((FailPointActionVisitor<? extends T>)visitor).visitAct_series_elm(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final Act_series_elmContext act_series_elm() throws RecognitionException {
+		Act_series_elmContext _localctx = new Act_series_elmContext(_ctx, getState());
+		enterRule(_localctx, 10, RULE_act_series_elm);
+		try {
+			setState(91);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case Return:
+			case Stall:
+			case StallReturn:
+			case Nop:
+			case LeftBracket:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(89);
+				act_repeatable();
+				}
+				break;
+			case IntegerLiteral:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(90);
+				act_repeated();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class Act_randomContext extends ParserRuleContext {
+		public TerminalNode LeftBracket() { return getToken(FailPointActionParser.LeftBracket, 0); }
+		public List<Act_random_elmContext> act_random_elm() {
+			return getRuleContexts(Act_random_elmContext.class);
+		}
+		public Act_random_elmContext act_random_elm(int i) {
+			return getRuleContext(Act_random_elmContext.class,i);
+		}
+		public TerminalNode RightBracket() { return getToken(FailPointActionParser.RightBracket, 0); }
+		public List<TerminalNode> Comma() { return getTokens(FailPointActionParser.Comma); }
+		public TerminalNode Comma(int i) {
+			return getToken(FailPointActionParser.Comma, i);
+		}
+		public Act_randomContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_act_random; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).enterAct_random(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).exitAct_random(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof FailPointActionVisitor ) return ((FailPointActionVisitor<? extends T>)visitor).visitAct_random(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final Act_randomContext act_random() throws RecognitionException {
+		Act_randomContext _localctx = new Act_randomContext(_ctx, getState());
+		enterRule(_localctx, 12, RULE_act_random);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(93);
+			match(LeftBracket);
+			setState(94);
+			act_random_elm();
+			setState(99);
+			_errHandler.sync(this);
+			_la = _input.LA(1);
+			while (_la==Comma) {
+				{
+				{
+				setState(95);
+				match(Comma);
+				setState(96);
+				act_random_elm();
+				}
+				}
+				setState(101);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+			}
+			setState(102);
+			match(RightBracket);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class Act_random_elmContext extends ParserRuleContext {
+		public Random_probContext random_prob() {
+			return getRuleContext(Random_probContext.class,0);
+		}
+		public TerminalNode Star() { return getToken(FailPointActionParser.Star, 0); }
+		public Act_qualifiableContext act_qualifiable() {
+			return getRuleContext(Act_qualifiableContext.class,0);
+		}
+		public Act_random_elmContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_act_random_elm; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).enterAct_random_elm(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).exitAct_random_elm(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof FailPointActionVisitor ) return ((FailPointActionVisitor<? extends T>)visitor).visitAct_random_elm(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final Act_random_elmContext act_random_elm() throws RecognitionException {
+		Act_random_elmContext _localctx = new Act_random_elmContext(_ctx, getState());
+		enterRule(_localctx, 14, RULE_act_random_elm);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(104);
+			random_prob();
+			setState(105);
+			match(Star);
+			setState(106);
+			act_qualifiable();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class Random_probContext extends ParserRuleContext {
+		public FloatLiteralContext floatLiteral() {
+			return getRuleContext(FloatLiteralContext.class,0);
+		}
+		public Random_probContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_random_prob; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).enterRandom_prob(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).exitRandom_prob(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof FailPointActionVisitor ) return ((FailPointActionVisitor<? extends T>)visitor).visitRandom_prob(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final Random_probContext random_prob() throws RecognitionException {
+		Random_probContext _localctx = new Random_probContext(_ctx, getState());
+		enterRule(_localctx, 16, RULE_random_prob);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(108);
+			floatLiteral();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class Act_qualifiableContext extends ParserRuleContext {
+		public Act_nopContext act_nop() {
+			return getRuleContext(Act_nopContext.class,0);
+		}
+		public Act_stallContext act_stall() {
+			return getRuleContext(Act_stallContext.class,0);
+		}
+		public Act_returnContext act_return() {
+			return getRuleContext(Act_returnContext.class,0);
+		}
+		public Act_stall_returnContext act_stall_return() {
+			return getRuleContext(Act_stall_returnContext.class,0);
+		}
+		public Act_qualifiableContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_act_qualifiable; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).enterAct_qualifiable(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).exitAct_qualifiable(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof FailPointActionVisitor ) return ((FailPointActionVisitor<? extends T>)visitor).visitAct_qualifiable(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final Act_qualifiableContext act_qualifiable() throws RecognitionException {
+		Act_qualifiableContext _localctx = new Act_qualifiableContext(_ctx, getState());
+		enterRule(_localctx, 18, RULE_act_qualifiable);
+		try {
+			setState(114);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case Nop:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(110);
+				act_nop();
+				}
+				break;
+			case Stall:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(111);
+				act_stall();
+				}
+				break;
+			case Return:
+				enterOuterAlt(_localctx, 3);
+				{
+				setState(112);
+				act_return();
+				}
+				break;
+			case StallReturn:
+				enterOuterAlt(_localctx, 4);
+				{
+				setState(113);
+				act_stall_return();
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class Act_repeatedContext extends ParserRuleContext {
+		public Repeat_timesContext repeat_times() {
+			return getRuleContext(Repeat_timesContext.class,0);
+		}
+		public TerminalNode Star() { return getToken(FailPointActionParser.Star, 0); }
+		public Act_repeatableContext act_repeatable() {
+			return getRuleContext(Act_repeatableContext.class,0);
+		}
+		public Act_repeatedContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_act_repeated; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).enterAct_repeated(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).exitAct_repeated(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof FailPointActionVisitor ) return ((FailPointActionVisitor<? extends T>)visitor).visitAct_repeated(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final Act_repeatedContext act_repeated() throws RecognitionException {
+		Act_repeatedContext _localctx = new Act_repeatedContext(_ctx, getState());
+		enterRule(_localctx, 20, RULE_act_repeated);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(116);
+			repeat_times();
+			setState(117);
+			match(Star);
+			setState(118);
+			act_repeatable();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class Repeat_timesContext extends ParserRuleContext {
+		public IntegerLiteralContext integerLiteral() {
+			return getRuleContext(IntegerLiteralContext.class,0);
+		}
+		public Repeat_timesContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_repeat_times; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).enterRepeat_times(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).exitRepeat_times(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof FailPointActionVisitor ) return ((FailPointActionVisitor<? extends T>)visitor).visitRepeat_times(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final Repeat_timesContext repeat_times() throws RecognitionException {
+		Repeat_timesContext _localctx = new Repeat_timesContext(_ctx, getState());
+		enterRule(_localctx, 22, RULE_repeat_times);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(120);
+			integerLiteral();
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class Act_repeatableContext extends ParserRuleContext {
+		public Act_qualifiableContext act_qualifiable() {
+			return getRuleContext(Act_qualifiableContext.class,0);
+		}
+		public Act_randomContext act_random() {
+			return getRuleContext(Act_randomContext.class,0);
+		}
+		public Act_repeatableContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_act_repeatable; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).enterAct_repeatable(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).exitAct_repeatable(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof FailPointActionVisitor ) return ((FailPointActionVisitor<? extends T>)visitor).visitAct_repeatable(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final Act_repeatableContext act_repeatable() throws RecognitionException {
+		Act_repeatableContext _localctx = new Act_repeatableContext(_ctx, getState());
+		enterRule(_localctx, 24, RULE_act_repeatable);
+		try {
+			setState(124);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case Return:
+			case Stall:
+			case StallReturn:
+			case Nop:
+				enterOuterAlt(_localctx, 1);
+				{
+				setState(122);
+				act_qualifiable();
+				}
+				break;
+			case LeftBracket:
+				enterOuterAlt(_localctx, 2);
+				{
+				setState(123);
+				act_random();
 				}
 				break;
 			default:
@@ -407,11 +960,11 @@ public class FailPointActionParser extends Parser {
 
 	public final Act_gdbContext act_gdb() throws RecognitionException {
 		Act_gdbContext _localctx = new Act_gdbContext(_ctx, getState());
-		enterRule(_localctx, 6, RULE_act_gdb);
+		enterRule(_localctx, 26, RULE_act_gdb);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(72);
+			setState(126);
 			match(Gdb);
 			}
 		}
@@ -449,273 +1002,12 @@ public class FailPointActionParser extends Parser {
 
 	public final Act_gcoreContext act_gcore() throws RecognitionException {
 		Act_gcoreContext _localctx = new Act_gcoreContext(_ctx, getState());
-		enterRule(_localctx, 8, RULE_act_gcore);
+		enterRule(_localctx, 28, RULE_act_gcore);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(74);
+			setState(128);
 			match(Gcore);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class Act_repeatedContext extends ParserRuleContext {
-		public IntegerLiteralContext integerLiteral() {
-			return getRuleContext(IntegerLiteralContext.class,0);
-		}
-		public TerminalNode Star() { return getToken(FailPointActionParser.Star, 0); }
-		public Act_stallContext act_stall() {
-			return getRuleContext(Act_stallContext.class,0);
-		}
-		public Act_returnContext act_return() {
-			return getRuleContext(Act_returnContext.class,0);
-		}
-		public Act_stall_returnContext act_stall_return() {
-			return getRuleContext(Act_stall_returnContext.class,0);
-		}
-		public Act_randomizedContext act_randomized() {
-			return getRuleContext(Act_randomizedContext.class,0);
-		}
-		public Act_nopContext act_nop() {
-			return getRuleContext(Act_nopContext.class,0);
-		}
-		public Act_repeatedContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_act_repeated; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).enterAct_repeated(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).exitAct_repeated(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof FailPointActionVisitor ) return ((FailPointActionVisitor<? extends T>)visitor).visitAct_repeated(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final Act_repeatedContext act_repeated() throws RecognitionException {
-		Act_repeatedContext _localctx = new Act_repeatedContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_act_repeated);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(76);
-			integerLiteral();
-			setState(77);
-			match(Star);
-			setState(83);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case Stall:
-				{
-				setState(78);
-				act_stall();
-				}
-				break;
-			case Return:
-				{
-				setState(79);
-				act_return();
-				}
-				break;
-			case StallReturn:
-				{
-				setState(80);
-				act_stall_return();
-				}
-				break;
-			case LeftBracket:
-				{
-				setState(81);
-				act_randomized();
-				}
-				break;
-			case Nop:
-				{
-				setState(82);
-				act_nop();
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class Act_randomizedContext extends ParserRuleContext {
-		public TerminalNode LeftBracket() { return getToken(FailPointActionParser.LeftBracket, 0); }
-		public List<Act_probableContext> act_probable() {
-			return getRuleContexts(Act_probableContext.class);
-		}
-		public Act_probableContext act_probable(int i) {
-			return getRuleContext(Act_probableContext.class,i);
-		}
-		public TerminalNode RightBracket() { return getToken(FailPointActionParser.RightBracket, 0); }
-		public List<TerminalNode> Comma() { return getTokens(FailPointActionParser.Comma); }
-		public TerminalNode Comma(int i) {
-			return getToken(FailPointActionParser.Comma, i);
-		}
-		public Act_randomizedContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_act_randomized; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).enterAct_randomized(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).exitAct_randomized(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof FailPointActionVisitor ) return ((FailPointActionVisitor<? extends T>)visitor).visitAct_randomized(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final Act_randomizedContext act_randomized() throws RecognitionException {
-		Act_randomizedContext _localctx = new Act_randomizedContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_act_randomized);
-		int _la;
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(85);
-			match(LeftBracket);
-			setState(86);
-			act_probable();
-			setState(91);
-			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while (_la==Comma) {
-				{
-				{
-				setState(87);
-				match(Comma);
-				setState(88);
-				act_probable();
-				}
-				}
-				setState(93);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-			}
-			setState(94);
-			match(RightBracket);
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class Act_probableContext extends ParserRuleContext {
-		public FloatLiteralContext floatLiteral() {
-			return getRuleContext(FloatLiteralContext.class,0);
-		}
-		public TerminalNode Star() { return getToken(FailPointActionParser.Star, 0); }
-		public Act_stallContext act_stall() {
-			return getRuleContext(Act_stallContext.class,0);
-		}
-		public Act_returnContext act_return() {
-			return getRuleContext(Act_returnContext.class,0);
-		}
-		public Act_stall_returnContext act_stall_return() {
-			return getRuleContext(Act_stall_returnContext.class,0);
-		}
-		public Act_nopContext act_nop() {
-			return getRuleContext(Act_nopContext.class,0);
-		}
-		public Act_probableContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_act_probable; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).enterAct_probable(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof FailPointActionListener ) ((FailPointActionListener)listener).exitAct_probable(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof FailPointActionVisitor ) return ((FailPointActionVisitor<? extends T>)visitor).visitAct_probable(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final Act_probableContext act_probable() throws RecognitionException {
-		Act_probableContext _localctx = new Act_probableContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_act_probable);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(96);
-			floatLiteral();
-			setState(97);
-			match(Star);
-			setState(102);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case Stall:
-				{
-				setState(98);
-				act_stall();
-				}
-				break;
-			case Return:
-				{
-				setState(99);
-				act_return();
-				}
-				break;
-			case StallReturn:
-				{
-				setState(100);
-				act_stall_return();
-				}
-				break;
-			case Nop:
-				{
-				setState(101);
-				act_nop();
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -752,11 +1044,11 @@ public class FailPointActionParser extends Parser {
 
 	public final Act_nopContext act_nop() throws RecognitionException {
 		Act_nopContext _localctx = new Act_nopContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_act_nop);
+		enterRule(_localctx, 30, RULE_act_nop);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(104);
+			setState(130);
 			match(Nop);
 			}
 		}
@@ -803,21 +1095,21 @@ public class FailPointActionParser extends Parser {
 
 	public final Act_stall_returnContext act_stall_return() throws RecognitionException {
 		Act_stall_returnContext _localctx = new Act_stall_returnContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_act_stall_return);
+		enterRule(_localctx, 32, RULE_act_stall_return);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(106);
+			setState(132);
 			match(StallReturn);
-			setState(107);
+			setState(133);
 			match(LeftParenthesis);
-			setState(108);
+			setState(134);
 			numerical_literal();
-			setState(109);
+			setState(135);
 			match(Comma);
-			setState(110);
+			setState(136);
 			literal();
-			setState(111);
+			setState(137);
 			match(RightParenthesis);
 			}
 		}
@@ -860,17 +1152,17 @@ public class FailPointActionParser extends Parser {
 
 	public final Act_stallContext act_stall() throws RecognitionException {
 		Act_stallContext _localctx = new Act_stallContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_act_stall);
+		enterRule(_localctx, 34, RULE_act_stall);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(113);
+			setState(139);
 			match(Stall);
-			setState(114);
+			setState(140);
 			match(LeftParenthesis);
-			setState(115);
+			setState(141);
 			numerical_literal();
-			setState(116);
+			setState(142);
 			match(RightParenthesis);
 			}
 		}
@@ -913,17 +1205,17 @@ public class FailPointActionParser extends Parser {
 
 	public final Act_returnContext act_return() throws RecognitionException {
 		Act_returnContext _localctx = new Act_returnContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_act_return);
+		enterRule(_localctx, 36, RULE_act_return);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(118);
+			setState(144);
 			match(Return);
-			setState(119);
+			setState(145);
 			match(LeftParenthesis);
-			setState(120);
+			setState(146);
 			literal();
-			setState(121);
+			setState(147);
 			match(RightParenthesis);
 			}
 		}
@@ -961,11 +1253,11 @@ public class FailPointActionParser extends Parser {
 
 	public final Act_showContext act_show() throws RecognitionException {
 		Act_showContext _localctx = new Act_showContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_act_show);
+		enterRule(_localctx, 38, RULE_act_show);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(123);
+			setState(149);
 			match(Show);
 			}
 		}
@@ -1003,11 +1295,11 @@ public class FailPointActionParser extends Parser {
 
 	public final Act_disableContext act_disable() throws RecognitionException {
 		Act_disableContext _localctx = new Act_disableContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_act_disable);
+		enterRule(_localctx, 40, RULE_act_disable);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(125);
+			setState(151);
 			match(Disable);
 			}
 		}
@@ -1045,11 +1337,11 @@ public class FailPointActionParser extends Parser {
 
 	public final Act_enableContext act_enable() throws RecognitionException {
 		Act_enableContext _localctx = new Act_enableContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_act_enable);
+		enterRule(_localctx, 42, RULE_act_enable);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(127);
+			setState(153);
 			match(Enable);
 			}
 		}
@@ -1087,11 +1379,11 @@ public class FailPointActionParser extends Parser {
 
 	public final Act_statusContext act_status() throws RecognitionException {
 		Act_statusContext _localctx = new Act_statusContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_act_status);
+		enterRule(_localctx, 44, RULE_act_status);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(129);
+			setState(155);
 			match(Status);
 			}
 		}
@@ -1129,11 +1421,11 @@ public class FailPointActionParser extends Parser {
 
 	public final Act_clearContext act_clear() throws RecognitionException {
 		Act_clearContext _localctx = new Act_clearContext(_ctx, getState());
-		enterRule(_localctx, 32, RULE_act_clear);
+		enterRule(_localctx, 46, RULE_act_clear);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(131);
+			setState(157);
 			match(Clear);
 			}
 		}
@@ -1182,36 +1474,36 @@ public class FailPointActionParser extends Parser {
 
 	public final LiteralContext literal() throws RecognitionException {
 		LiteralContext _localctx = new LiteralContext(_ctx, getState());
-		enterRule(_localctx, 34, RULE_literal);
+		enterRule(_localctx, 48, RULE_literal);
 		try {
-			setState(137);
+			setState(163);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case BooleanLiteral:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(133);
+				setState(159);
 				booleanLiteral();
 				}
 				break;
 			case StringLiteral:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(134);
+				setState(160);
 				stringLiteral();
 				}
 				break;
 			case IntegerLiteral:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(135);
+				setState(161);
 				integerLiteral();
 				}
 				break;
 			case FloatLiteral:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(136);
+				setState(162);
 				floatLiteral();
 				}
 				break;
@@ -1258,22 +1550,22 @@ public class FailPointActionParser extends Parser {
 
 	public final Numerical_literalContext numerical_literal() throws RecognitionException {
 		Numerical_literalContext _localctx = new Numerical_literalContext(_ctx, getState());
-		enterRule(_localctx, 36, RULE_numerical_literal);
+		enterRule(_localctx, 50, RULE_numerical_literal);
 		try {
-			setState(141);
+			setState(167);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IntegerLiteral:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(139);
+				setState(165);
 				integerLiteral();
 				}
 				break;
 			case FloatLiteral:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(140);
+				setState(166);
 				floatLiteral();
 				}
 				break;
@@ -1315,11 +1607,11 @@ public class FailPointActionParser extends Parser {
 
 	public final BooleanLiteralContext booleanLiteral() throws RecognitionException {
 		BooleanLiteralContext _localctx = new BooleanLiteralContext(_ctx, getState());
-		enterRule(_localctx, 38, RULE_booleanLiteral);
+		enterRule(_localctx, 52, RULE_booleanLiteral);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(143);
+			setState(169);
 			match(BooleanLiteral);
 			}
 		}
@@ -1357,11 +1649,11 @@ public class FailPointActionParser extends Parser {
 
 	public final StringLiteralContext stringLiteral() throws RecognitionException {
 		StringLiteralContext _localctx = new StringLiteralContext(_ctx, getState());
-		enterRule(_localctx, 40, RULE_stringLiteral);
+		enterRule(_localctx, 54, RULE_stringLiteral);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(145);
+			setState(171);
 			match(StringLiteral);
 			}
 		}
@@ -1399,11 +1691,11 @@ public class FailPointActionParser extends Parser {
 
 	public final IntegerLiteralContext integerLiteral() throws RecognitionException {
 		IntegerLiteralContext _localctx = new IntegerLiteralContext(_ctx, getState());
-		enterRule(_localctx, 42, RULE_integerLiteral);
+		enterRule(_localctx, 56, RULE_integerLiteral);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(147);
+			setState(173);
 			match(IntegerLiteral);
 			}
 		}
@@ -1441,11 +1733,11 @@ public class FailPointActionParser extends Parser {
 
 	public final FloatLiteralContext floatLiteral() throws RecognitionException {
 		FloatLiteralContext _localctx = new FloatLiteralContext(_ctx, getState());
-		enterRule(_localctx, 44, RULE_floatLiteral);
+		enterRule(_localctx, 58, RULE_floatLiteral);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(149);
+			setState(175);
 			match(FloatLiteral);
 			}
 		}
@@ -1461,47 +1753,54 @@ public class FailPointActionParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\31\u009a\4\2\t\2"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\31\u00b4\4\2\t\2"+
 		"\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
-		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\3\2\3\2\3"+
-		"\2\3\3\3\3\3\3\7\3\67\n\3\f\3\16\3:\13\3\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3"+
-		"\4\3\4\3\4\3\4\3\4\3\4\5\4I\n\4\3\5\3\5\3\6\3\6\3\7\3\7\3\7\3\7\3\7\3"+
-		"\7\3\7\5\7V\n\7\3\b\3\b\3\b\3\b\7\b\\\n\b\f\b\16\b_\13\b\3\b\3\b\3\t\3"+
-		"\t\3\t\3\t\3\t\3\t\5\ti\n\t\3\n\3\n\3\13\3\13\3\13\3\13\3\13\3\13\3\13"+
-		"\3\f\3\f\3\f\3\f\3\f\3\r\3\r\3\r\3\r\3\r\3\16\3\16\3\17\3\17\3\20\3\20"+
-		"\3\21\3\21\3\22\3\22\3\23\3\23\3\23\3\23\5\23\u008c\n\23\3\24\3\24\5\24"+
-		"\u0090\n\24\3\25\3\25\3\26\3\26\3\27\3\27\3\30\3\30\3\30\2\2\31\2\4\6"+
-		"\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\2\2\2\u009b\2\60\3\2\2\2\4"+
-		"\63\3\2\2\2\6H\3\2\2\2\bJ\3\2\2\2\nL\3\2\2\2\fN\3\2\2\2\16W\3\2\2\2\20"+
-		"b\3\2\2\2\22j\3\2\2\2\24l\3\2\2\2\26s\3\2\2\2\30x\3\2\2\2\32}\3\2\2\2"+
-		"\34\177\3\2\2\2\36\u0081\3\2\2\2 \u0083\3\2\2\2\"\u0085\3\2\2\2$\u008b"+
-		"\3\2\2\2&\u008f\3\2\2\2(\u0091\3\2\2\2*\u0093\3\2\2\2,\u0095\3\2\2\2."+
-		"\u0097\3\2\2\2\60\61\5\4\3\2\61\62\7\2\2\3\62\3\3\2\2\2\638\5\6\4\2\64"+
-		"\65\7\b\2\2\65\67\5\6\4\2\66\64\3\2\2\2\67:\3\2\2\28\66\3\2\2\289\3\2"+
-		"\2\29\5\3\2\2\2:8\3\2\2\2;I\5\b\5\2<I\5\n\6\2=I\5\22\n\2>I\5\26\f\2?I"+
-		"\5\30\r\2@I\5\24\13\2AI\5\16\b\2BI\5\f\7\2CI\5\32\16\2DI\5\34\17\2EI\5"+
-		"\36\20\2FI\5 \21\2GI\5\"\22\2H;\3\2\2\2H<\3\2\2\2H=\3\2\2\2H>\3\2\2\2"+
-		"H?\3\2\2\2H@\3\2\2\2HA\3\2\2\2HB\3\2\2\2HC\3\2\2\2HD\3\2\2\2HE\3\2\2\2"+
-		"HF\3\2\2\2HG\3\2\2\2I\7\3\2\2\2JK\7\t\2\2K\t\3\2\2\2LM\7\n\2\2M\13\3\2"+
-		"\2\2NO\5,\27\2OU\7\30\2\2PV\5\26\f\2QV\5\30\r\2RV\5\24\13\2SV\5\16\b\2"+
-		"TV\5\22\n\2UP\3\2\2\2UQ\3\2\2\2UR\3\2\2\2US\3\2\2\2UT\3\2\2\2V\r\3\2\2"+
-		"\2WX\7\26\2\2X]\5\20\t\2YZ\7\31\2\2Z\\\5\20\t\2[Y\3\2\2\2\\_\3\2\2\2]"+
-		"[\3\2\2\2]^\3\2\2\2^`\3\2\2\2_]\3\2\2\2`a\7\27\2\2a\17\3\2\2\2bc\5.\30"+
-		"\2ch\7\30\2\2di\5\26\f\2ei\5\30\r\2fi\5\24\13\2gi\5\22\n\2hd\3\2\2\2h"+
-		"elm\3\2\2\2hf\3\2\2\2hg\3\2\2\2i\21\3\2\2\2jk\7\23\2\2k\23\3\2\2\2lm\7\r"+
-		"\2\2mn\7\24\2\2no\5&\24\2op\7\31\2\2pq\5$\23\2qr\7\25\2\2r\25\3\2\2\2"+
-		"st\7\f\2\2tu\7\24\2\2uv\5&\24\2vw\7\25\2\2w\27\3\2\2\2xy\7\13\2\2yz\7"+
-		"\24\2\2z{\5$\23\2{|\7\25\2\2|\31\3\2\2\2}~\7\20\2\2~\33\3\2\2\2\177\u0080"+
-		"\7\16\2\2\u0080\35\3\2\2\2\u0081\u0082\7\17\2\2\u0082\37\3\2\2\2\u0083"+
-		"\u0084\7\21\2\2\u0084!\3\2\2\2\u0085\u0086\7\22\2\2\u0086#\3\2\2\2\u0087"+
-		"\u008c\5(\25\2\u0088\u008c\5*\26\2\u0089\u008c\5,\27\2\u008a\u008c\5."+
-		"\30\2\u008b\u0087\3\2\2\2\u008b\u0088\3\2\2\2\u008b\u0089\3\2\2\2\u008b"+
-		"\u008a\3\2\2\2\u008c%\3\2\2\2\u008d\u0090\5,\27\2\u008e\u0090\5.\30\2"+
-		"\u008f\u008d\3\2\2\2\u008f\u008e\3\2\2\2\u0090\'\3\2\2\2\u0091\u0092\7"+
-		"\3\2\2\u0092)\3\2\2\2\u0093\u0094\7\4\2\2\u0094+\3\2\2\2\u0095\u0096\7"+
-		"\5\2\2\u0096-\3\2\2\2\u0097\u0098\7\6\2\2\u0098/\3\2\2\2\t8HU]h\u008b"+
-		"\u008f";
+		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
+		"\4\32\t\32\4\33\t\33\4\34\t\34\4\35\t\35\4\36\t\36\4\37\t\37\3\2\3\2\3"+
+		"\2\3\3\3\3\5\3D\n\3\3\4\3\4\3\4\7\4I\n\4\f\4\16\4L\13\4\3\4\5\4O\n\4\3"+
+		"\5\3\5\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6Z\n\6\3\7\3\7\5\7^\n\7\3\b\3\b\3"+
+		"\b\3\b\7\bd\n\b\f\b\16\bg\13\b\3\b\3\b\3\t\3\t\3\t\3\t\3\n\3\n\3\13\3"+
+		"\13\3\13\3\13\5\13u\n\13\3\f\3\f\3\f\3\f\3\r\3\r\3\16\3\16\5\16\177\n"+
+		"\16\3\17\3\17\3\20\3\20\3\21\3\21\3\22\3\22\3\22\3\22\3\22\3\22\3\22\3"+
+		"\23\3\23\3\23\3\23\3\23\3\24\3\24\3\24\3\24\3\24\3\25\3\25\3\26\3\26\3"+
+		"\27\3\27\3\30\3\30\3\31\3\31\3\32\3\32\3\32\3\32\5\32\u00a6\n\32\3\33"+
+		"\3\33\5\33\u00aa\n\33\3\34\3\34\3\35\3\35\3\36\3\36\3\37\3\37\3\37\2\2"+
+		" \2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:<\2\2\2"+
+		"\u00a8\2>\3\2\2\2\4C\3\2\2\2\6E\3\2\2\2\bP\3\2\2\2\nY\3\2\2\2\f]\3\2\2"+
+		"\2\16_\3\2\2\2\20j\3\2\2\2\22n\3\2\2\2\24t\3\2\2\2\26v\3\2\2\2\30z\3\2"+
+		"\2\2\32~\3\2\2\2\34\u0080\3\2\2\2\36\u0082\3\2\2\2 \u0084\3\2\2\2\"\u0086"+
+		"\3\2\2\2$\u008d\3\2\2\2&\u0092\3\2\2\2(\u0097\3\2\2\2*\u0099\3\2\2\2,"+
+		"\u009b\3\2\2\2.\u009d\3\2\2\2\60\u009f\3\2\2\2\62\u00a5\3\2\2\2\64\u00a9"+
+		"\3\2\2\2\66\u00ab\3\2\2\28\u00ad\3\2\2\2:\u00af\3\2\2\2<\u00b1\3\2\2\2"+
+		">?\5\4\3\2?@\7\2\2\3@\3\3\2\2\2AD\5\n\6\2BD\5\6\4\2CA\3\2\2\2CB\3\2\2"+
+		"\2D\5\3\2\2\2EJ\5\f\7\2FG\7\b\2\2GI\5\f\7\2HF\3\2\2\2IL\3\2\2\2JH\3\2"+
+		"\2\2JK\3\2\2\2KN\3\2\2\2LJ\3\2\2\2MO\5\b\5\2NM\3\2\2\2NO\3\2\2\2O\7\3"+
+		"\2\2\2PQ\5*\26\2Q\t\3\2\2\2RZ\5\34\17\2SZ\5\36\20\2TZ\5,\27\2UZ\5.\30"+
+		"\2VZ\5\60\31\2WZ\5(\25\2XZ\5*\26\2YR\3\2\2\2YS\3\2\2\2YT\3\2\2\2YU\3\2"+
+		"\2\2YV\3\2\2\2YW\3\2\2\2YX\3\2\2\2Z\13\3\2\2\2[^\5\32\16\2\\^\5\26\f\2"+
+		"][\3\2\2\2]\\\3\2\2\2^\r\3\2\2\2_`\7\26\2\2`e\5\20\t\2ab\7\31\2\2bd\5"+
+		"\20\t\2ca\3\2\2\2dg\3\2\2\2ec\3\2\2\2ef\3\2\2\2fh\3\2\2\2ge\3\2\2\2hi"+
+		"\7\27\2\2i\17\3\2\2\2jk\5\22\n\2kl\7\30\2\2lm\5\24\13\2m\21\3\2\2\2no"+
+		"\5<\37\2o\23\3\2\2\2pu\5 \21\2qu\5$\23\2ru\5&\24\2su\5\"\22\2tp\3\2\2"+
+		"\2tq\3\2\2\2tr\3\2\2\2ts\3\2\2\2u\25\3\2\2\2vw\5\30\r\2wx\7\30\2\2xy\5"+
+		"\32\16\2y\27\3\2\2\2z{\5:\36\2{\31\3\2\2\2|\177\5\24\13\2}\177\5\16\b"+
+		"\2~|\3\2\2\2~}\3\2\2\2\177\33\3\2\2\2\u0080\u0081\7\t\2\2\u0081\35\3\2"+
+		"\2\2\u0082\u0083\7\n\2\2\u0083\37\3\2\2\2\u0084\u0085\7\23\2\2\u0085!"+
+		"\3\2\2\2\u0086\u0087\7\r\2\2\u0087\u0088\7\24\2\2\u0088\u0089\5\64\33"+
+		"\2\u0089\u008a\7\31\2\2\u008a\u008b\5\62\32\2\u008b\u008c\7\25\2\2\u008c"+
+		"#\3\2\2\2\u008d\u008e\7\f\2\2\u008e\u008f\7\24\2\2\u008f\u0090\5\64\33"+
+		"\2\u0090\u0091\7\25\2\2\u0091%\3\2\2\2\u0092\u0093\7\13\2\2\u0093\u0094"+
+		"\7\24\2\2\u0094\u0095\5\62\32\2\u0095\u0096\7\25\2\2\u0096\'\3\2\2\2\u0097"+
+		"\u0098\7\20\2\2\u0098)\3\2\2\2\u0099\u009a\7\16\2\2\u009a+\3\2\2\2\u009b"+
+		"\u009c\7\17\2\2\u009c-\3\2\2\2\u009d\u009e\7\21\2\2\u009e/\3\2\2\2\u009f"+
+		"\u00a0\7\22\2\2\u00a0\61\3\2\2\2\u00a1\u00a6\5\66\34\2\u00a2\u00a6\58"+
+		"\35\2\u00a3\u00a6\5:\36\2\u00a4\u00a6\5<\37\2\u00a5\u00a1\3\2\2\2\u00a5"+
+		"\u00a2\3\2\2\2\u00a5\u00a3\3\2\2\2\u00a5\u00a4\3\2\2\2\u00a6\63\3\2\2"+
+		"\2\u00a7\u00aa\5:\36\2\u00a8\u00aa\5<\37\2\u00a9\u00a7\3\2\2\2\u00a9\u00a8"+
+		"\3\2\2\2\u00aa\65\3\2\2\2\u00ab\u00ac\7\3\2\2\u00ac\67\3\2\2\2\u00ad\u00ae"+
+		"\7\4\2\2\u00ae9\3\2\2\2\u00af\u00b0\7\5\2\2\u00b0;\3\2\2\2\u00b1\u00b2"+
+		"\7\6\2\2\u00b2=\3\2\2\2\fCJNY]et~\u00a5\u00a9";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

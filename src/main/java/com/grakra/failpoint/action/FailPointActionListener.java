@@ -18,15 +18,35 @@ public interface FailPointActionListener extends ParseTreeListener {
 	 */
 	void exitFailpoint_action(FailPointActionParser.Failpoint_actionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link FailPointActionParser#act_compound}.
+	 * Enter a parse tree produced by {@link FailPointActionParser#failpoint_action_internal}.
 	 * @param ctx the parse tree
 	 */
-	void enterAct_compound(FailPointActionParser.Act_compoundContext ctx);
+	void enterFailpoint_action_internal(FailPointActionParser.Failpoint_action_internalContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link FailPointActionParser#act_compound}.
+	 * Exit a parse tree produced by {@link FailPointActionParser#failpoint_action_internal}.
 	 * @param ctx the parse tree
 	 */
-	void exitAct_compound(FailPointActionParser.Act_compoundContext ctx);
+	void exitFailpoint_action_internal(FailPointActionParser.Failpoint_action_internalContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FailPointActionParser#act_series}.
+	 * @param ctx the parse tree
+	 */
+	void enterAct_series(FailPointActionParser.Act_seriesContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FailPointActionParser#act_series}.
+	 * @param ctx the parse tree
+	 */
+	void exitAct_series(FailPointActionParser.Act_seriesContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FailPointActionParser#act_series_trail}.
+	 * @param ctx the parse tree
+	 */
+	void enterAct_series_trail(FailPointActionParser.Act_series_trailContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FailPointActionParser#act_series_trail}.
+	 * @param ctx the parse tree
+	 */
+	void exitAct_series_trail(FailPointActionParser.Act_series_trailContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FailPointActionParser#act_simple}.
 	 * @param ctx the parse tree
@@ -37,6 +57,86 @@ public interface FailPointActionListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAct_simple(FailPointActionParser.Act_simpleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FailPointActionParser#act_series_elm}.
+	 * @param ctx the parse tree
+	 */
+	void enterAct_series_elm(FailPointActionParser.Act_series_elmContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FailPointActionParser#act_series_elm}.
+	 * @param ctx the parse tree
+	 */
+	void exitAct_series_elm(FailPointActionParser.Act_series_elmContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FailPointActionParser#act_random}.
+	 * @param ctx the parse tree
+	 */
+	void enterAct_random(FailPointActionParser.Act_randomContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FailPointActionParser#act_random}.
+	 * @param ctx the parse tree
+	 */
+	void exitAct_random(FailPointActionParser.Act_randomContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FailPointActionParser#act_random_elm}.
+	 * @param ctx the parse tree
+	 */
+	void enterAct_random_elm(FailPointActionParser.Act_random_elmContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FailPointActionParser#act_random_elm}.
+	 * @param ctx the parse tree
+	 */
+	void exitAct_random_elm(FailPointActionParser.Act_random_elmContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FailPointActionParser#random_prob}.
+	 * @param ctx the parse tree
+	 */
+	void enterRandom_prob(FailPointActionParser.Random_probContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FailPointActionParser#random_prob}.
+	 * @param ctx the parse tree
+	 */
+	void exitRandom_prob(FailPointActionParser.Random_probContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FailPointActionParser#act_qualifiable}.
+	 * @param ctx the parse tree
+	 */
+	void enterAct_qualifiable(FailPointActionParser.Act_qualifiableContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FailPointActionParser#act_qualifiable}.
+	 * @param ctx the parse tree
+	 */
+	void exitAct_qualifiable(FailPointActionParser.Act_qualifiableContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FailPointActionParser#act_repeated}.
+	 * @param ctx the parse tree
+	 */
+	void enterAct_repeated(FailPointActionParser.Act_repeatedContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FailPointActionParser#act_repeated}.
+	 * @param ctx the parse tree
+	 */
+	void exitAct_repeated(FailPointActionParser.Act_repeatedContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FailPointActionParser#repeat_times}.
+	 * @param ctx the parse tree
+	 */
+	void enterRepeat_times(FailPointActionParser.Repeat_timesContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FailPointActionParser#repeat_times}.
+	 * @param ctx the parse tree
+	 */
+	void exitRepeat_times(FailPointActionParser.Repeat_timesContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link FailPointActionParser#act_repeatable}.
+	 * @param ctx the parse tree
+	 */
+	void enterAct_repeatable(FailPointActionParser.Act_repeatableContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link FailPointActionParser#act_repeatable}.
+	 * @param ctx the parse tree
+	 */
+	void exitAct_repeatable(FailPointActionParser.Act_repeatableContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FailPointActionParser#act_gdb}.
 	 * @param ctx the parse tree
@@ -57,36 +157,6 @@ public interface FailPointActionListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAct_gcore(FailPointActionParser.Act_gcoreContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link FailPointActionParser#act_repeated}.
-	 * @param ctx the parse tree
-	 */
-	void enterAct_repeated(FailPointActionParser.Act_repeatedContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FailPointActionParser#act_repeated}.
-	 * @param ctx the parse tree
-	 */
-	void exitAct_repeated(FailPointActionParser.Act_repeatedContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link FailPointActionParser#act_randomized}.
-	 * @param ctx the parse tree
-	 */
-	void enterAct_randomized(FailPointActionParser.Act_randomizedContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FailPointActionParser#act_randomized}.
-	 * @param ctx the parse tree
-	 */
-	void exitAct_randomized(FailPointActionParser.Act_randomizedContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link FailPointActionParser#act_probable}.
-	 * @param ctx the parse tree
-	 */
-	void enterAct_probable(FailPointActionParser.Act_probableContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FailPointActionParser#act_probable}.
-	 * @param ctx the parse tree
-	 */
-	void exitAct_probable(FailPointActionParser.Act_probableContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link FailPointActionParser#act_nop}.
 	 * @param ctx the parse tree

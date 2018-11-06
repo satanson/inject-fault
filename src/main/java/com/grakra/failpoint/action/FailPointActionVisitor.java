@@ -17,17 +17,77 @@ public interface FailPointActionVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFailpoint_action(FailPointActionParser.Failpoint_actionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link FailPointActionParser#act_compound}.
+	 * Visit a parse tree produced by {@link FailPointActionParser#failpoint_action_internal}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAct_compound(FailPointActionParser.Act_compoundContext ctx);
+	T visitFailpoint_action_internal(FailPointActionParser.Failpoint_action_internalContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FailPointActionParser#act_series}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAct_series(FailPointActionParser.Act_seriesContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FailPointActionParser#act_series_trail}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAct_series_trail(FailPointActionParser.Act_series_trailContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link FailPointActionParser#act_simple}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitAct_simple(FailPointActionParser.Act_simpleContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FailPointActionParser#act_series_elm}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAct_series_elm(FailPointActionParser.Act_series_elmContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FailPointActionParser#act_random}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAct_random(FailPointActionParser.Act_randomContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FailPointActionParser#act_random_elm}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAct_random_elm(FailPointActionParser.Act_random_elmContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FailPointActionParser#random_prob}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRandom_prob(FailPointActionParser.Random_probContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FailPointActionParser#act_qualifiable}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAct_qualifiable(FailPointActionParser.Act_qualifiableContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FailPointActionParser#act_repeated}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAct_repeated(FailPointActionParser.Act_repeatedContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FailPointActionParser#repeat_times}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRepeat_times(FailPointActionParser.Repeat_timesContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FailPointActionParser#act_repeatable}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAct_repeatable(FailPointActionParser.Act_repeatableContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link FailPointActionParser#act_gdb}.
 	 * @param ctx the parse tree
@@ -40,24 +100,6 @@ public interface FailPointActionVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitAct_gcore(FailPointActionParser.Act_gcoreContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link FailPointActionParser#act_repeated}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAct_repeated(FailPointActionParser.Act_repeatedContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link FailPointActionParser#act_randomized}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAct_randomized(FailPointActionParser.Act_randomizedContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link FailPointActionParser#act_probable}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAct_probable(FailPointActionParser.Act_probableContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link FailPointActionParser#act_nop}.
 	 * @param ctx the parse tree

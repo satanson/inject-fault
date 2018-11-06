@@ -28,13 +28,37 @@ public class FailPointActionBaseListener implements FailPointActionListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAct_compound(FailPointActionParser.Act_compoundContext ctx) { }
+	@Override public void enterFailpoint_action_internal(FailPointActionParser.Failpoint_action_internalContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAct_compound(FailPointActionParser.Act_compoundContext ctx) { }
+	@Override public void exitFailpoint_action_internal(FailPointActionParser.Failpoint_action_internalContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAct_series(FailPointActionParser.Act_seriesContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAct_series(FailPointActionParser.Act_seriesContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAct_series_trail(FailPointActionParser.Act_series_trailContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAct_series_trail(FailPointActionParser.Act_series_trailContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -47,6 +71,102 @@ public class FailPointActionBaseListener implements FailPointActionListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitAct_simple(FailPointActionParser.Act_simpleContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAct_series_elm(FailPointActionParser.Act_series_elmContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAct_series_elm(FailPointActionParser.Act_series_elmContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAct_random(FailPointActionParser.Act_randomContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAct_random(FailPointActionParser.Act_randomContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAct_random_elm(FailPointActionParser.Act_random_elmContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAct_random_elm(FailPointActionParser.Act_random_elmContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterRandom_prob(FailPointActionParser.Random_probContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRandom_prob(FailPointActionParser.Random_probContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAct_qualifiable(FailPointActionParser.Act_qualifiableContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAct_qualifiable(FailPointActionParser.Act_qualifiableContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAct_repeated(FailPointActionParser.Act_repeatedContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAct_repeated(FailPointActionParser.Act_repeatedContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterRepeat_times(FailPointActionParser.Repeat_timesContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRepeat_times(FailPointActionParser.Repeat_timesContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAct_repeatable(FailPointActionParser.Act_repeatableContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAct_repeatable(FailPointActionParser.Act_repeatableContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -71,42 +191,6 @@ public class FailPointActionBaseListener implements FailPointActionListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitAct_gcore(FailPointActionParser.Act_gcoreContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterAct_repeated(FailPointActionParser.Act_repeatedContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitAct_repeated(FailPointActionParser.Act_repeatedContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterAct_randomized(FailPointActionParser.Act_randomizedContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitAct_randomized(FailPointActionParser.Act_randomizedContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterAct_probable(FailPointActionParser.Act_probableContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitAct_probable(FailPointActionParser.Act_probableContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
