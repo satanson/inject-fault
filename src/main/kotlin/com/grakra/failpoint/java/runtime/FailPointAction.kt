@@ -13,7 +13,6 @@ import java.util.*
 
 sealed class FailPointAction {
   fun act(fp: FailPointDescriptor): String = TODO()
-
   fun parse(s: String): Result<FailPointAction> {
     return Result.b wrap {
       Unit.let {
@@ -36,7 +35,7 @@ sealed class FailPointAction {
         listener
       }
     } bind {
-      it.failpoint
+      it.failpoint!!
     }
   }
 
@@ -47,10 +46,11 @@ sealed class FailPointAction {
       is FpReturn<*> -> "return($v)"
       is FpStall -> "stall($t)"
       is FpStallReturn<*> -> "stall_return($t, $v)"
-      is FpProbable -> "$prop*${elm.stringify()}"
-      is FpRandomized -> "[${elms.joinToString(", ") { it.stringify() }}]"
-      is FpRepeated -> "$times*${elm.stringify()}"
-      is FpSequential -> elms.joinToString("->") { it.stringify() }
+      is FpRandomElm -> "$prop*${elm.stringify()}"
+      is FpRandom -> "[${elms.joinToString(", ") { it.stringify() }}]"
+      is FpSeriesElm -> "$times*${elm.stringify()}"
+      is FpSeriesTrail -> "${FpDisable.stringify()}"
+      is FpSeries -> elms.joinToString("->") { it.stringify() }
       is FpEnable -> "enable"
       is FpClear -> "clear"
       is FpShow -> "show"
@@ -59,56 +59,57 @@ sealed class FailPointAction {
   }
 }
 
-sealed class QualifiedFailPointAction : FailPointAction() {
-  val qualified: FailPointAction
+//sealed class FpRepeated : FailPointAction() {
+//  val qualified: FailPointAction
+//    get() = when (this) {
+//      is FpRandom -> this.draw()
+//      else -> this
+//    }
+//}
+sealed class FpSimple : FailPointAction()
+
+sealed class FpQualifiable : FpRepeatable()
+sealed class FpRepeatable : FailPointAction() {
+  val value: FailPointAction
     get() = when (this) {
-      is FpRandomized -> this.draw()
+      is FpRandom -> draw()
       else -> this
     }
 }
 
-sealed class ComposableFailPointAction : FailPointAction() {}
+sealed class FpRepeated : FailPointAction() {
+  companion object {
+    val EndOfFpRepeated = Exception("End of ComposableFailPointAction")
+  }
 
-sealed class NonComposableFailPointAction : FailPointAction()
-
-object FpShow : NonComposableFailPointAction() {
+  abstract fun next(): Result<FailPointAction>
 }
 
-object FpStatus : NonComposableFailPointAction() {
+object FpShow : FpSimple()
+object FpStatus : FpSimple()
+object FpClear : FpSimple()
+object FpEnable : FpSimple()
+object FpDisable : FpSimple()
+object FpNop : FpQualifiable()
+data class FpReturn<V>(val v: V) : FpQualifiable() {
 }
 
-object FpClear : NonComposableFailPointAction() {
+data class FpStall(val t: Long) : FpQualifiable() {
 }
 
-object FpEnable : NonComposableFailPointAction() {
+data class FpStallReturn<V>(val t: Long, val v: V) : FpQualifiable() {
 }
 
-object FpDisable : QualifiedFailPointAction() {
-}
-
-object FpNop : QualifiedFailPointAction() {
-}
-
-data class FpReturn<V>(val v: V) : QualifiedFailPointAction() {
-}
-
-data class FpStall(val t: Long) : QualifiedFailPointAction() {
-}
-
-data class FpStallReturn<V>(val t: Long, val v: V) : QualifiedFailPointAction() {
-}
-
-data class FpProbable(
-  val elm: QualifiedFailPointAction,
+data class FpRandomElm(
+  val elm: FpQualifiable,
   val prop: Double) : FailPointAction() {
   init {
     assert(prop > 0.0)
-    assert(elm !is FpDisable)
   }
 }
 
-data class FpRandomized(
-  val elms: Array<FpProbable>) : QualifiedFailPointAction() {
+data class FpRandom(
+  val elms: Array<FpRandomElm>) : FpRepeatable() {
   private val sum = elms.sumByDouble { it.prop }
   private val bounds = elms.fold(listOf(0.0)) { l, p ->
     l + (l.last() + p.prop / sum)
@@ -122,38 +123,47 @@ data class FpRandomized(
   }
 }
 
-data class FpRepeated(val elm: QualifiedFailPointAction, val times: Int) : ComposableFailPointAction() {
-  init {
-    assert(times > 0)
-    assert(elm !is FpDisable || times == 1)
-  }
-
+object FpSeriesTrail : FpRepeated() {
   var count = 0
-
-  companion object {
-    val EndOfComposableFp = Exception("End of ComposableFailPointAction")
-  }
-
-  fun next(): Result<FailPointAction> {
+  override fun next(): Result<FailPointAction> {
     return Result.wrap {
-      if (count < times) {
+      if (count < 1) {
         count += 1
-        elm.qualified
+        FpDisable
       } else {
         count = 0
-        throw EndOfComposableFp
+        throw EndOfFpRepeated
       }
     }
   }
 }
 
-data class FpSequential(val elms: Array<FpRepeated>) : NonComposableFailPointAction() {
+data class FpSeriesElm(val times: Int, val elm: FpRepeatable) : FpRepeated() {
   init {
-    assert(!elms.isEmpty())
-    assert(elms.size - elms.takeWhile { it.elm !is FpDisable }.size <= 1)
+    assert(times > 0)
   }
 
-  var idx = 0
+  var count = 0
+  override fun next(): Result<FailPointAction> {
+    return Result.wrap {
+      if (count < times) {
+        count += 1
+        elm.value
+      } else {
+        count = 0
+        throw EndOfFpRepeated
+      }
+    }
+  }
+}
+
+data class FpSeries(val seriesElms: Array<FpSeriesElm>, val trail: FpSeriesTrail?) : FailPointAction() {
+  init {
+    assert(!seriesElms.isEmpty())
+  }
+
+  val elms = trail?.let { arrayOf(*seriesElms, it) } ?: seriesElms
+  private var idx = 0
 
   fun next(): FailPointAction {
     while (true) {
