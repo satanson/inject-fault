@@ -9,33 +9,36 @@ import org.antlr.v4.runtime.CodePointCharStream
 import org.antlr.v4.runtime.CommonTokenStream
 import org.antlr.v4.runtime.tree.ParseTreeWalker
 import java.nio.CharBuffer
-import java.util.*
+import java.util.Random
 
 sealed class FailPointAction {
   fun act(fp: FailPointDescriptor): String = TODO()
-  fun parse(s: String): Result<FailPointAction> {
-    return Result.b wrap {
-      Unit.let {
-        s.toCharArray()
-      }.let {
-        CharBuffer.wrap(it)
-      }.let {
-        CodePointBuffer.withChars(it)
-      }.let {
-        CodePointCharStream.fromBuffer(it)
-      }.let {
-        FailPointActionLexer(it)
-      }.let {
-        CommonTokenStream(it)
-      }.let {
-        FailPointActionParser(it).failpoint_action()
-      }.let {
-        val listener = FailPointActionListener()
-        ParseTreeWalker().walk(listener, it)
-        listener
+
+  companion object {
+    fun parse(s: String): Result<FailPointAction> {
+      return Result.b wrap {
+        Unit.let {
+          s.toCharArray()
+        }.let {
+          CharBuffer.wrap(it)
+        }.let {
+          CodePointBuffer.withChars(it)
+        }.let {
+          CodePointCharStream.fromBuffer(it)
+        }.let {
+          FailPointActionLexer(it)
+        }.let {
+          CommonTokenStream(it)
+        }.let {
+          FailPointActionParser(it).failpoint_action()
+        }.let {
+          val listener = FailPointActionListener()
+          ParseTreeWalker().walk(listener, it)
+          listener
+        }
+      } bind {
+        it.failpoint!!
       }
-    } bind {
-      it.failpoint!!
     }
   }
 
@@ -59,15 +62,7 @@ sealed class FailPointAction {
   }
 }
 
-//sealed class FpRepeated : FailPointAction() {
-//  val qualified: FailPointAction
-//    get() = when (this) {
-//      is FpRandom -> this.draw()
-//      else -> this
-//    }
-//}
 sealed class FpSimple : FailPointAction()
-
 sealed class FpQualifiable : FpRepeatable()
 sealed class FpRepeatable : FailPointAction() {
   val value: FailPointAction
@@ -101,15 +96,15 @@ data class FpStallReturn<V>(val t: Long, val v: V) : FpQualifiable() {
 }
 
 data class FpRandomElm(
-  val elm: FpQualifiable,
-  val prop: Double) : FailPointAction() {
+    val prop: Double,
+    val elm: FpQualifiable) : FailPointAction() {
   init {
     assert(prop > 0.0)
   }
 }
 
 data class FpRandom(
-  val elms: Array<FpRandomElm>) : FpRepeatable() {
+    val elms: Array<FpRandomElm>) : FpRepeatable() {
   private val sum = elms.sumByDouble { it.prop }
   private val bounds = elms.fold(listOf(0.0)) { l, p ->
     l + (l.last() + p.prop / sum)
@@ -138,7 +133,9 @@ object FpSeriesTrail : FpRepeated() {
   }
 }
 
-data class FpSeriesElm(val times: Int, val elm: FpRepeatable) : FpRepeated() {
+data class FpSeriesElm(
+    val times: Long,
+    val elm: FpRepeatable) : FpRepeated() {
   init {
     assert(times > 0)
   }
@@ -157,7 +154,9 @@ data class FpSeriesElm(val times: Int, val elm: FpRepeatable) : FpRepeated() {
   }
 }
 
-data class FpSeries(val seriesElms: Array<FpSeriesElm>, val trail: FpSeriesTrail?) : FailPointAction() {
+data class FpSeries(
+    val seriesElms: Array<FpSeriesElm>,
+    val trail: FpSeriesTrail?) : FailPointAction() {
   init {
     assert(!seriesElms.isEmpty())
   }

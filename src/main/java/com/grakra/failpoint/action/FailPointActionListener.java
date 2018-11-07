@@ -258,16 +258,6 @@ public interface FailPointActionListener extends ParseTreeListener {
 	 */
 	void exitLiteral(FailPointActionParser.LiteralContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link FailPointActionParser#numerical_literal}.
-	 * @param ctx the parse tree
-	 */
-	void enterNumerical_literal(FailPointActionParser.Numerical_literalContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link FailPointActionParser#numerical_literal}.
-	 * @param ctx the parse tree
-	 */
-	void exitNumerical_literal(FailPointActionParser.Numerical_literalContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link FailPointActionParser#booleanLiteral}.
 	 * @param ctx the parse tree
 	 */

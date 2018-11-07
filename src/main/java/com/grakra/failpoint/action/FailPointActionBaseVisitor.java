@@ -192,13 +192,6 @@ public class FailPointActionBaseVisitor<T> extends AbstractParseTreeVisitor<T> i
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNumerical_literal(FailPointActionParser.Numerical_literalContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	@Override public T visitBooleanLiteral(FailPointActionParser.BooleanLiteralContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

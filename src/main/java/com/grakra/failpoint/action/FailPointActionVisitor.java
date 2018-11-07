@@ -161,12 +161,6 @@ public interface FailPointActionVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLiteral(FailPointActionParser.LiteralContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link FailPointActionParser#numerical_literal}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitNumerical_literal(FailPointActionParser.Numerical_literalContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link FailPointActionParser#booleanLiteral}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

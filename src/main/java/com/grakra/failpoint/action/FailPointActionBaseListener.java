@@ -316,18 +316,6 @@ public class FailPointActionBaseListener implements FailPointActionListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNumerical_literal(FailPointActionParser.Numerical_literalContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitNumerical_literal(FailPointActionParser.Numerical_literalContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterBooleanLiteral(FailPointActionParser.BooleanLiteralContext ctx) { }
 	/**
 	 * {@inheritDoc}

@@ -79,11 +79,11 @@ act_nop
     ;
 
 act_stall_return
-    :   StallReturn LeftParenthesis numerical_literal Comma literal RightParenthesis
+    :   StallReturn LeftParenthesis integerLiteral Comma literal RightParenthesis
     ;
 
 act_stall
-    :   Stall LeftParenthesis numerical_literal RightParenthesis
+    :   Stall LeftParenthesis integerLiteral RightParenthesis
     ;
 
 act_return
@@ -114,11 +114,6 @@ literal
     :   booleanLiteral
     |   stringLiteral
     |   integerLiteral
-    |   floatLiteral
-    ;
-
-numerical_literal
-    :   integerLiteral
     |   floatLiteral
     ;
 
@@ -155,7 +150,7 @@ FloatLiteral
     ;
 
 Ignored_Ws
-    :   Ws ->skip
+    :   (Ws|Nl) ->skip
     ;
 
 Arrow
